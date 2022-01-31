@@ -32,7 +32,7 @@ function filter(array, callback) {
 */
 function some(array, callback) {
   return array.reduce((prev, curr, index) => {
-    if (prev === true) return true;
+    if (prev) return true;
     if (callback(curr, index, array)) return !prev;
     return prev;
   }, false);
@@ -46,9 +46,8 @@ function some(array, callback) {
 */
 function every(array, callback) {
   return array.reduce((prev, curr, index) => {
-    if (prev === false) return false;
-    if (callback(curr, index, array)) return true;
-    return false;
+    if (!prev) return false;
+    return !!callback(curr, index, array);
   }, true);
 }
 
